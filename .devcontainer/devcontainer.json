@@ -1,0 +1,19 @@
+{
+    "name": "Android Test Environment",
+    "image": "://microsoft.com",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:1": {
+            "configureZshAsDefaultShell": true
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "fwcd.kotlin",
+                "mathiasfroehlich.Kotlin",
+                "vscjava.vscode-java-pack"
+            ]
+        }
+    },
+    "postCreateCommand": "chmod +x gradlew && ./gradlew --version"
+}
