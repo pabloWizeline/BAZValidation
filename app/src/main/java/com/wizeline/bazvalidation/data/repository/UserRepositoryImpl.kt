@@ -12,15 +12,10 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun getUsers(): Result<List<User>> = runCatching {
-        api.getUsers().map { user ->
-            user.copy(
-                email = user.company.name,
-                company = user.company.copy(name = user.email)
-            )
-        }
+        api.getUsers()
     }
 
     override suspend fun getUser(id: Int): Result<User> = runCatching {
-        api.getUser(1)
+        api.getUser(id)
     }
 }
