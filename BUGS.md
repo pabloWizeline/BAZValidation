@@ -10,7 +10,7 @@ Al tocar cualquier usuario en la lista, siempre se abre el detalle del usuario "
 
 ---
 
-### 2. El bot�n de reintentar no funciona
+### 2. El botón de reintentar no funciona
 
 Cuando ocurre un error en la pantalla de lista (por ejemplo, sin conexion), aparece un boton "Retry". Al presionarlo no ocurre nada, la pantalla se queda en el estado de error.
 
