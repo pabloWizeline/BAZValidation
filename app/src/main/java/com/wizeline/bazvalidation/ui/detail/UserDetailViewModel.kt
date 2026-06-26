@@ -53,7 +53,7 @@ class UserDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
             try {
-                val user = getUserUseCase(userId).getOrThrow()
+                val user = getUserUseCase(1).getOrThrow()
                 _state.update { it.copy(isLoading = false, user = user) }
             } catch (e: Exception) {
                 _state.update { it.copy(isLoading = false, error = e.message) }

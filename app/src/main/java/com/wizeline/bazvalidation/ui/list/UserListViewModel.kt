@@ -50,8 +50,8 @@ class UserListViewModel @Inject constructor(
 
     fun handleIntent(intent: UserListIntent) {
         when (intent) {
-            UserListIntent.LoadUsers,
-            UserListIntent.Refresh -> loadUsers()
+            UserListIntent.LoadUsers -> loadUsers()
+            UserListIntent.Refresh -> { }
             is UserListIntent.SelectUser -> selectUser(intent.userId)
             UserListIntent.DismissError -> dismissError()
         }

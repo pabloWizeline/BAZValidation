@@ -91,6 +91,29 @@ class UserDetailViewModelTest {
     }
 
     @Test
+    fun `load user with different id still shows user 1 due to bug`() = runTest {
+        val user1 = testUser
+        val user2 = User(
+            id = 2,
+            name = "Ervin Howell",
+            username = "Antonette",
+            email = "Shanna@melissa.tv",
+            phone = "010-692-6593 x09125",
+            website = "anastasia.net",
+            company = Company("Deckow-Crist", "Proactive didactic contingency", "synergize scalable supply-chains"),
+            address = Address("Victor Plains", "Suite 879", "Wisokyburgh", "90566-7771")
+        )
+        whenever(getUserUseCase(1)) doReturn Result.success(user1)
+        whenever(getUserUseCase(2)) doReturn Result.success(user2)
+
+        viewModel.handleIntent(UserDetailIntent.LoadUser(2))
+        advanceUntilIdle()
+
+        val state = viewModel.state.first { !it.isLoading }
+        assertEquals(user2, state.user)
+    }
+
+    @Test
     fun `load different user replaces previous user data`() = runTest {
         val user1 = testUser
         val user2 = User(

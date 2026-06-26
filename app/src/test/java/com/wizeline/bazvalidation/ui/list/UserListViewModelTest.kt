@@ -124,6 +124,27 @@ class UserListViewModelTest {
     }
 
     @Test
+    fun `refresh does not clear error after failure due to bug`() = runTest {
+        val errorMessage = "Network error"
+        whenever(getUsersUseCase()) doReturn Result.failure(IOException(errorMessage))
+
+        viewModel = UserListViewModel(getUsersUseCase)
+        advanceUntilIdle()
+
+        var state = viewModel.state.first { !it.isLoading }
+        assertEquals(errorMessage, state.error)
+
+        whenever(getUsersUseCase()) doReturn Result.success(testUsers)
+
+        viewModel.handleIntent(UserListIntent.Refresh)
+        advanceUntilIdle()
+
+        state = viewModel.state.first { !it.isLoading }
+        assertNull(state.error)
+        assertEquals(testUsers, state.users)
+    }
+
+    @Test
     fun `refresh reloads users`() = runTest {
         whenever(getUsersUseCase()) doReturn Result.success(testUsers)
 
