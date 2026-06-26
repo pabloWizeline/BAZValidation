@@ -1,6 +1,9 @@
 {
     "name": "Android Test Environment",
     "image": "://microsoft.com",
+    "containerEnv": {
+        "JAVA_HOME": "/usr/lib/jvm/msopenjdk-current"
+    },
     "features": {
         "ghcr.io/devcontainers/features/common-utils:1": {
             "configureZshAsDefaultShell": true
